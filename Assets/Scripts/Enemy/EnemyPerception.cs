@@ -7,10 +7,18 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public class EnemyPerception : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("どこまで遠くのプレイヤーを見つけられるか")]
+    [Label("目の良さ（視力）")]
     private float _sightDistance = 10.0f;
 
     [SerializeField]
+    [Tooltip("どこまで広くのプレイヤーを見つけられるか")]
+    [Label("目の良さ（広さ）")]
     private float _sightRadius = 60.0f;
+    [Tooltip("プレイヤーを見失ってから諦めるまでのじかん")]
+    [Label("見失うまでの時間")]
+    public float lostTime = 5.0f;
+
     // 視線のレイ密度（正面1本は最低として加えて何本か）
     [SerializeField]
     private int _sightDensity = 6;
@@ -18,6 +26,7 @@ public class EnemyPerception : MonoBehaviour
     public bool IsFoundPlayer { get; private set; }
     public bool IsCathcPlayer { get; private set; }
 
+    [HideInInspector]
     public GameObject playerGameObject;
     // Start is called before the first frame update
     void Start()

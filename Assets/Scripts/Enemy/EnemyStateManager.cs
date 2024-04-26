@@ -5,16 +5,19 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Patrol,
-    Stand,
+    パトロール,
+    スタンド,
 }
 
 public class EnemyStateManager : MonoBehaviour
 {
+    [Tooltip("スタンド：その場できょろきょろ　パトロール：行ったり来たりうろうろ")]
+    [Label("敵の種類")]
+    public EnemyType enemyType;
+
     [SerializeField]
     private GameObject movePointsParent;
 
-    public EnemyType enemyType;
     public List<Vector3> movePoints;
     public EnemyState currentState;
 
@@ -35,10 +38,10 @@ public class EnemyStateManager : MonoBehaviour
 
         switch (enemyType)
         {
-            case EnemyType.Patrol:
+            case EnemyType.パトロール:
                 EnemyStateChange(new EnemyStatePatrol());
                 break;
-            case EnemyType.Stand:
+            case EnemyType.スタンド:
                 EnemyStateChange(new EnemyStateStand());
                 break;
             default:

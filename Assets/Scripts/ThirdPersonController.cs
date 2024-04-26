@@ -32,32 +32,43 @@ namespace StarterAssets
         [Label("はやさの変わり方")]
         public float SpeedChangeRate = 10.0f;
 
+        [HideInInspector]
         public AudioClip LandingAudioClip;
+        [HideInInspector]
         public AudioClip[] FootstepAudioClips;
-        [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
+
+        [Label("足音の大きさ")]
+        [Range(0, 1)] 
+        public float FootstepAudioVolume = 0.5f;
 
         [Space(10)]
-        [Tooltip("The height the player can jump")]
+        [Tooltip("ジャンプで飛ぶ高さ")]
         [Label("ジャンプ力")]
         public float JumpHeight = 1.2f;
 
-        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+        [Tooltip("重力の強さ。落ちるスピードの強さ")]
+        [Label("重力（落ちる力）")]
         public float Gravity = -15.0f;
 
         [Space(10)]
-        [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+        [Tooltip("再ジャンプが使えるまでの時間")]
+        [Label("ジャンプの連続で使える時間")]
         public float JumpTimeout = 0.50f;
 
-        [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+        [Tooltip("落ちる状態になるまでの時間")]
+        [Label("落ちる状態になるまでの時間")]
         public float FallTimeout = 0.15f;
 
+        [HideInInspector]
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         public bool Grounded = true;
 
+        [HideInInspector]
         [Tooltip("Useful for rough ground")]
         public float GroundedOffset = -0.14f;
 
+        [HideInInspector]
         [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
         public float GroundedRadius = 0.28f;
 

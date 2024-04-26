@@ -7,6 +7,11 @@ public class Goal : MonoBehaviour
 {
     public static event Action OnSuccessGame;
 
+    [SerializeField]
+    [Tooltip("プレイヤーがゴールしたときの音")]
+    [Label("ゴール音")]
+    private AudioClip goalAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {

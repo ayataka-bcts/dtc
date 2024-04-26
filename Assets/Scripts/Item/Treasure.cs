@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Treasure : MonoBehaviour
 {
+
+    [SerializeField]
+    [Tooltip("プレイヤーがお宝をゲットしたときの音")]
+    [Label("ゲット音")]
+    private AudioClip getAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {

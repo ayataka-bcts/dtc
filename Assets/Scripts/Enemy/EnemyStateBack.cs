@@ -26,10 +26,10 @@ public class EnemyStateBack : EnemyState
         {
             switch(_enemyState)
             {
-                case EnemyType.Stand:
+                case EnemyType.スタンド:
                     ChangeState(new EnemyStateStand());
                     break;
-                case EnemyType.Patrol:
+                case EnemyType.パトロール:
                     ChangeState(new EnemyStatePatrol());
                     break;
                 default:

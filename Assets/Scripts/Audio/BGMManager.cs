@@ -47,7 +47,7 @@ public class BGMManager : AudioManager<BGMManager> {
   /// <summary>
   /// 再生
   /// </summary>
-  public void Play(AudioClip audioClip, float volumeRate = 1, float delay = 0, float pitch = 1, bool isLoop = true, bool allowsDuplicate = false) {
+  public void Play(AudioClip audioClip, float volumeRate = 0.5f, float delay = 0, float pitch = 1, bool isLoop = true, bool allowsDuplicate = false) {
     //重複が許可されてない場合は、既に再生しているものを止める
     if (!allowsDuplicate) {
       Stop();
@@ -58,7 +58,7 @@ public class BGMManager : AudioManager<BGMManager> {
   /// <summary>
   /// 再生
   /// </summary>
-  public void Play(string audioPath, float volumeRate = 1, float delay = 0, float pitch = 1, bool isLoop = true, bool allowsDuplicate = false) {
+  public void Play(string audioPath, float volumeRate = 0.5f, float delay = 0, float pitch = 1, bool isLoop = true, bool allowsDuplicate = false) {
     //重複が許可されてない場合は、既に再生しているものを止める
     if (!allowsDuplicate) {
       Stop();

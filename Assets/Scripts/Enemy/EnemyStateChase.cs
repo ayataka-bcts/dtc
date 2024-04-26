@@ -8,7 +8,7 @@ public class EnemyStateChase : EnemyState
     private GameObject _player;
 
     private float lostTimer = 0.0f;
-    private const float lostTime = 5.0f;
+    private float lostTime = 5.0f;
 
     public EnemyStateChase()
     {
@@ -18,8 +18,9 @@ public class EnemyStateChase : EnemyState
     public override void Exec(EnemyPerception perception)
     {
         _player = perception.playerGameObject;
+        lostTime = perception.lostTime;
 
-        if(IsLostPlayer(perception.IsFoundPlayer))
+        if (IsLostPlayer(perception.IsFoundPlayer))
         {
             ChangeState(new EnemyStateBack());
         }
