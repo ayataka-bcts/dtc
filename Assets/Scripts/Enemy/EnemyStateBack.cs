@@ -26,10 +26,10 @@ public class EnemyStateBack : EnemyState
         {
             switch(_enemyState)
             {
-                case EnemyType.ƒXƒ^ƒ“ƒh:
+                case EnemyType.ã‚¹ã‚¿ãƒ³ãƒ‰:
                     ChangeState(new EnemyStateStand());
                     break;
-                case EnemyType.ƒpƒgƒ[ƒ‹:
+                case EnemyType.ãƒ‘ãƒˆãƒ­ãƒ¼ãƒ«:
                     ChangeState(new EnemyStatePatrol());
                     break;
                 default:

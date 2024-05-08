@@ -5,14 +5,14 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    ƒpƒgƒ[ƒ‹,
-    ƒXƒ^ƒ“ƒh,
+    ãƒ‘ãƒˆãƒ­ãƒ¼ãƒ«,
+    ã‚¹ã‚¿ãƒ³ãƒ‰,
 }
 
 public class EnemyStateManager : MonoBehaviour
 {
-    [Tooltip("ƒXƒ^ƒ“ƒhF‚»‚Ìê‚Å‚«‚å‚ë‚«‚å‚ë@ƒpƒgƒ[ƒ‹Fs‚Á‚½‚è—ˆ‚½‚è‚¤‚ë‚¤‚ë")]
-    [Label("“G‚Ìí—Ş")]
+    [Tooltip("ã‚¹ã‚¿ãƒ³ãƒ‰ï¼šãã®å ´ã§ãã‚‡ã‚ãã‚‡ã‚ã€€ãƒ‘ãƒˆãƒ­ãƒ¼ãƒ«ï¼šè¡Œã£ãŸã‚Šæ¥ãŸã‚Šã†ã‚ã†ã‚")]
+    [Label("æ•µã®ç¨®é¡")]
     public EnemyType enemyType;
 
     [SerializeField]
@@ -38,10 +38,10 @@ public class EnemyStateManager : MonoBehaviour
 
         switch (enemyType)
         {
-            case EnemyType.ƒpƒgƒ[ƒ‹:
+            case EnemyType.ãƒ‘ãƒˆãƒ­ãƒ¼ãƒ«:
                 EnemyStateChange(new EnemyStatePatrol());
                 break;
-            case EnemyType.ƒXƒ^ƒ“ƒh:
+            case EnemyType.ã‚¹ã‚¿ãƒ³ãƒ‰:
                 EnemyStateChange(new EnemyStateStand());
                 break;
             default:

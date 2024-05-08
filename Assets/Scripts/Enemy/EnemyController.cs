@@ -7,21 +7,21 @@ using UnityEngine.Windows;
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy")]
-    [Tooltip("•à‚­‚Í‚â‚³‚ª•Ï‚í‚è‚Ü‚·(m/s)")]
-    [Label("•à‚­‚Í‚â‚³")]
+    [Tooltip("æ­©ãã¯ã‚„ã•ãŒå¤‰ã‚ã‚Šã¾ã™(m/s)")]
+    [Label("æ­©ãã¯ã‚„ã•")]
     public float MoveSpeed = 2.0f;
 
-    [Tooltip("‘–‚é‘¬‚³‚ª•Ï‚í‚è‚Ü‚·(m/s)")]
-    [Label("‘–‚é‚Í‚â‚³")]
+    [Tooltip("èµ°ã‚‹é€Ÿã•ãŒå¤‰ã‚ã‚Šã¾ã™(m/s)")]
+    [Label("èµ°ã‚‹ã¯ã‚„ã•")]
     public float SprintSpeed = 5.335f;
 
-    [Tooltip("Œü‚«‚ğ•Ï‚¦‚é‚Æ‚«‚Ì‘‚³")]
-    [Label("Œü‚«‚Ì‚Í‚â‚³")]
+    [Tooltip("å‘ãã‚’å¤‰ãˆã‚‹ã¨ãã®æ—©ã•")]
+    [Label("å‘ãã®ã¯ã‚„ã•")]
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
 
-    [Tooltip("‚Í‚â‚­‚È‚è‚â‚·‚³‚Æ‚¨‚»‚­‚È‚è‚â‚·‚³")]
-    [Label("‚Í‚â‚³‚Ì•Ï‚í‚è•û")]
+    [Tooltip("ã¯ã‚„ããªã‚Šã‚„ã™ã•ã¨ãŠãããªã‚Šã‚„ã™ã•")]
+    [Label("ã¯ã‚„ã•ã®å¤‰ã‚ã‚Šæ–¹")]
     public float SpeedChangeRate = 10.0f;
 
     [HideInInspector]
@@ -29,26 +29,26 @@ public class EnemyController : MonoBehaviour
     [HideInInspector]
     public AudioClip[] FootstepAudioClips;
 
-    [Label("‘«‰¹‚Ì‘å‚«‚³")]
+    [Label("è¶³éŸ³ã®å¤§ãã•")]
     [Range(0, 1)]
     public float FootstepAudioVolume = 0.5f;
 
     [Space(10)]
-    [Tooltip("ƒWƒƒƒ“ƒv‚Å”ò‚Ô‚‚³")]
-    [Label("ƒWƒƒƒ“ƒv—Í")]
+    [Tooltip("ã‚¸ãƒ£ãƒ³ãƒ—ã§é£›ã¶é«˜ã•")]
+    [Label("ã‚¸ãƒ£ãƒ³ãƒ—åŠ›")]
     public float JumpHeight = 1.2f;
 
-    [Tooltip("d—Í‚Ì‹­‚³B—‚¿‚éƒXƒs[ƒh‚Ì‹­‚³")]
-    [Label("d—Íi—‚¿‚é—Íj")] 
+    [Tooltip("é‡åŠ›ã®å¼·ã•ã€‚è½ã¡ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰ã®å¼·ã•")]
+    [Label("é‡åŠ›ï¼ˆè½ã¡ã‚‹åŠ›ï¼‰")] 
     public float Gravity = -15.0f;
 
     [Space(10)]
-    [Tooltip("ÄƒWƒƒƒ“ƒv‚ªg‚¦‚é‚Ü‚Å‚ÌŠÔ")]
-    [Label("ƒWƒƒƒ“ƒv‚Ì˜A‘±‚Åg‚¦‚éŠÔ")]
+    [Tooltip("å†ã‚¸ãƒ£ãƒ³ãƒ—ãŒä½¿ãˆã‚‹ã¾ã§ã®æ™‚é–“")]
+    [Label("ã‚¸ãƒ£ãƒ³ãƒ—ã®é€£ç¶šã§ä½¿ãˆã‚‹æ™‚é–“")]
     public float JumpTimeout = 0.50f;
 
-    [Tooltip("—‚¿‚éó‘Ô‚É‚È‚é‚Ü‚Å‚ÌŠÔ")]
-    [Label("—‚¿‚éó‘Ô‚É‚È‚é‚Ü‚Å‚ÌŠÔ")]
+    [Tooltip("è½ã¡ã‚‹çŠ¶æ…‹ã«ãªã‚‹ã¾ã§ã®æ™‚é–“")]
+    [Label("è½ã¡ã‚‹çŠ¶æ…‹ã«ãªã‚‹ã¾ã§ã®æ™‚é–“")]
     public float FallTimeout = 0.15f;
 
     [Header("Player Grounded")]

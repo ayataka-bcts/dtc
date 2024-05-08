@@ -7,19 +7,19 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public class EnemyPerception : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("‚Ç‚±‚Ü‚Å‰“‚­‚ÌƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚ç‚ê‚é‚©")]
-    [Label("–Ú‚Ì—Ç‚³i‹—Íj")]
+    [Tooltip("ã©ã“ã¾ã§é ãã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ã‚‰ã‚Œã‚‹ã‹")]
+    [Label("ç›®ã®è‰¯ã•ï¼ˆè¦–åŠ›ï¼‰")]
     private float _sightDistance = 10.0f;
 
     [SerializeField]
-    [Tooltip("‚Ç‚±‚Ü‚ÅL‚­‚ÌƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚ç‚ê‚é‚©")]
-    [Label("–Ú‚Ì—Ç‚³iL‚³j")]
+    [Tooltip("ã©ã“ã¾ã§åºƒãã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ã‚‰ã‚Œã‚‹ã‹")]
+    [Label("ç›®ã®è‰¯ã•ï¼ˆåºƒã•ï¼‰")]
     private float _sightRadius = 60.0f;
-    [Tooltip("ƒvƒŒƒCƒ„[‚ğŒ©¸‚Á‚Ä‚©‚ç’ú‚ß‚é‚Ü‚Å‚Ì‚¶‚©‚ñ")]
-    [Label("Œ©¸‚¤‚Ü‚Å‚ÌŠÔ")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹å¤±ã£ã¦ã‹ã‚‰è«¦ã‚ã‚‹ã¾ã§ã®ã˜ã‹ã‚“")]
+    [Label("è¦‹å¤±ã†ã¾ã§ã®æ™‚é–“")]
     public float lostTime = 5.0f;
 
-    // ‹ü‚ÌƒŒƒC–§“xi³–Ê1–{‚ÍÅ’á‚Æ‚µ‚Ä‰Á‚¦‚Ä‰½–{‚©j
+    // è¦–ç·šã®ãƒ¬ã‚¤å¯†åº¦ï¼ˆæ­£é¢1æœ¬ã¯æœ€ä½ã¨ã—ã¦åŠ ãˆã¦ä½•æœ¬ã‹ï¼‰
     [SerializeField]
     private int _sightDensity = 6;
 
@@ -43,7 +43,7 @@ public class EnemyPerception : MonoBehaviour
 
     void SightUpdate()
     {
-        Quaternion offsetRotation = Quaternion.Euler(0, -0.5f * _sightRadius, 0); // Y²‚ğ’†S‚É30“x‰ñ“]‚·‚élŒ³”
+        Quaternion offsetRotation = Quaternion.Euler(0, -0.5f * _sightRadius, 0); // Yè»¸ã‚’ä¸­å¿ƒã«30åº¦å›è»¢ã™ã‚‹å››å…ƒæ•°
         Vector3 rayTargetVec = offsetRotation * transform.forward;
         float durationRadius = _sightRadius / _sightDensity;
         for(int i = 0; i < _sightDensity + 1; i++) 
@@ -67,7 +67,7 @@ public class EnemyPerception : MonoBehaviour
                 IsFoundPlayer = false;
             }
 
-            Quaternion rotation = Quaternion.Euler(0, durationRadius, 0); // Y²‚ğ’†S‚É30“x‰ñ“]‚·‚élŒ³”
+            Quaternion rotation = Quaternion.Euler(0, durationRadius, 0); // Yè»¸ã‚’ä¸­å¿ƒã«30åº¦å›è»¢ã™ã‚‹å››å…ƒæ•°
             rayTargetVec = rotation * rayTargetVec;
         }
     }
