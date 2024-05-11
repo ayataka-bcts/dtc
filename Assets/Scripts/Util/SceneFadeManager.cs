@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class SceneFadeManager : FadeManager<SceneFadeManager>
 {
     //=================================================================================
-    //‰Šú‰»
+    //åˆæœŸåŒ–
     //=================================================================================
 
-    //‹N“®‚ÉÀs‚³‚ê‚é
+    //èµ·å‹•æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Initialize()
     {

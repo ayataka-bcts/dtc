@@ -17,16 +17,16 @@ public class StealthGameManager : MonoBehaviour
     public float timer{  get; private set; } = 0.0f;
 
     [SerializeField]
-    [Tooltip("ゲーム中の音楽")]
+    [Tooltip("繧ｲ繝ｼ繝荳ｭ縺ｮ髻ｳ讌ｽ")]
     [Label("BGM")]
     private AudioClip bgmAudioClip;
     [SerializeField]
-    [Tooltip("プレイヤーが敵に捕まった時の音")]
-    [Label("捕まったときの音")]
+    [Tooltip("繝励Ξ繧､繝､繝ｼ縺梧雰縺ｫ謐輔∪縺｣縺滓凾縺ｮ髻ｳ")]
+    [Label("謐輔∪縺｣縺溘→縺阪�ｮ髻ｳ")]
     private AudioClip catchAudioClip;
     [SerializeField]
-    [Tooltip("プレイヤーが敵に見つかった時の音")]
-    [Label("見つかったときの音")]
+    [Tooltip("繝励Ξ繧､繝､繝ｼ縺梧雰縺ｫ隕九▽縺九▲縺滓凾縺ｮ髻ｳ")]
+    [Label("隕九▽縺九▲縺溘→縺阪�ｮ髻ｳ")]
     private AudioClip foundAudioClip;
 
     // Start is called before the first frame update
