@@ -1,3 +1,4 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ public class Goal : MonoBehaviour
     public static event Action OnSuccessGame;
 
     [SerializeField]
-    [Tooltip("プレイヤーがゴールしたときの音")]
-    [Label("ゴール音")]
+    [Tooltip("繝励Ξ繧､繝､繝ｼ縺後ざ繝ｼ繝ｫ縺励◆縺ｨ縺阪�ｮ髻ｳ")]
+    [Label("繧ｴ繝ｼ繝ｫ髻ｳ")]
     private AudioClip goalAudioClip;
 
     // Start is called before the first frame update
@@ -28,7 +29,11 @@ public class Goal : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            OnSuccessGame?.Invoke();
+            var tpc = collision.gameObject.GetComponent<ThirdPersonController>();
+            if(tpc != null && tpc.hasTreasure)
+            {
+                OnSuccessGame?.Invoke();
+            }
         }
     }
 }

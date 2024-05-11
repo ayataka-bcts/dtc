@@ -65,6 +65,9 @@ namespace StarterAssets
         public bool Grounded = true;
 
         [HideInInspector]
+        public bool hasTreasure = false;
+
+        [HideInInspector]
         [Tooltip("Useful for rough ground")]
         public float GroundedOffset = -0.14f;
 
@@ -150,6 +153,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            hasTreasure = false;
+
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);

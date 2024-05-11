@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,8 @@ public class Treasure : MonoBehaviour
 {
 
     [SerializeField]
-    [Tooltip("ƒvƒŒƒCƒ„[‚ª‚¨•ó‚ðƒQƒbƒg‚µ‚½‚Æ‚«‚Ì‰¹")]
-    [Label("ƒQƒbƒg‰¹")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒãŠå®ã‚’ã‚²ãƒƒãƒˆã—ãŸã¨ãã®éŸ³")]
+    [Label("ã‚²ãƒƒãƒˆéŸ³")]
     private AudioClip getAudioClip;
 
     // Start is called before the first frame update
@@ -26,7 +27,12 @@ public class Treasure : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
+            var tpc = collision.gameObject.GetComponent<ThirdPersonController>();
+            if(tpc != null)
+            {
+                tpc.hasTreasure = true;
+                Destroy(this.gameObject);
+            }
         }
     }
 
