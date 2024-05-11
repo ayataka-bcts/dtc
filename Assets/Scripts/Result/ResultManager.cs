@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class ResultManager : MonoBehaviour
 {
-    private InputAction anyKeyAction;
+    private InputAction pressButtonAction;
 
     public float currentScore;
     public float[] rankingScores;
@@ -20,10 +20,11 @@ public class ResultManager : MonoBehaviour
         currentScore = PlayerPrefs.GetFloat("CurrentScore");
 
         // 任意のキー入力に対するアクションを設定
-        anyKeyAction = new InputAction(type: InputActionType.PassThrough);
-        anyKeyAction.AddBinding("<Keyboard>/anyKey");
-        anyKeyAction.performed += OnAnyKeyPerformed;
-        anyKeyAction.Enable();
+        pressButtonAction = new InputAction(type: InputActionType.PassThrough);
+        pressButtonAction.AddBinding("<Keyboard>/Space");
+        pressButtonAction.AddBinding("<Gamepad>/ButtonSouth");
+        pressButtonAction.performed += OnPressButtonPerformed;
+        pressButtonAction.Enable();
 
         Ranking ranking = new Ranking(currentScore);
         
@@ -39,7 +40,7 @@ public class ResultManager : MonoBehaviour
 
     }
 
-    private void OnAnyKeyPerformed(InputAction.CallbackContext context)
+    private void OnPressButtonPerformed(InputAction.CallbackContext context)
     {
         if (!isRequested)
         {
@@ -55,6 +56,6 @@ public class ResultManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        anyKeyAction.Disable();
+        pressButtonAction.Disable();
     }
 }

@@ -6,17 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    private InputAction anyKeyAction;
+    private InputAction pressButtonAction;
 
     private bool isRequested = false;
 
     private void Awake()
     {
         // 任意のキー入力に対するアクションを設定
-        anyKeyAction = new InputAction(type: InputActionType.PassThrough);
-        anyKeyAction.AddBinding("<Keyboard>/anyKey");
-        anyKeyAction.performed += OnAnyKeyPerformed;
-        anyKeyAction.Enable();
+        pressButtonAction = new InputAction(type: InputActionType.PassThrough);
+        pressButtonAction.AddBinding("<Keyboard>/Space");
+        pressButtonAction.AddBinding("<Gamepad>/ButtonSouth");
+        pressButtonAction.performed += OnAnyKeyPerformed;
+        pressButtonAction.Enable();
     }
 
     private void Start()
@@ -43,6 +44,6 @@ public class TitleManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        anyKeyAction.Disable();
+        pressButtonAction.Disable();
     }
 }
