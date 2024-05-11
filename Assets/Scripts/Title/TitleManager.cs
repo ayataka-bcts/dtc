@@ -8,9 +8,11 @@ public class TitleManager : MonoBehaviour
 {
     private InputAction anyKeyAction;
 
+    private bool isRequested = false;
+
     private void Awake()
     {
-        // ”CˆÓ‚ÌƒL[“ü—Í‚É‘Î‚·‚éƒAƒNƒVƒ‡ƒ“‚ğİ’è
+        // ä»»æ„ã®ã‚­ãƒ¼å…¥åŠ›ã«å¯¾ã™ã‚‹ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¨­å®š
         anyKeyAction = new InputAction(type: InputActionType.PassThrough);
         anyKeyAction.AddBinding("<Keyboard>/anyKey");
         anyKeyAction.performed += OnAnyKeyPerformed;
@@ -19,17 +21,24 @@ public class TitleManager : MonoBehaviour
 
     private void Start()
     {
+        isRequested = false;
+
         SceneFadeManager.Instance.FadeIn();
     }
 
     private void OnAnyKeyPerformed(InputAction.CallbackContext context)
     {
-        SceneFadeManager.Instance.FadeOut(LoadScene);
+        if(!isRequested)
+        {
+            SceneFadeManager.Instance.FadeOut(LoadScene);
+            isRequested = true;
+        }
     }
 
     private void LoadScene()
     {
         SceneManager.LoadScene("Main");
+
     }
 
     private void OnDestroy()

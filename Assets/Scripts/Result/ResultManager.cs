@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,11 +13,13 @@ public class ResultManager : MonoBehaviour
     public float currentScore;
     public float[] rankingScores;
 
+    private bool isRequested = false;
+
     private void Start()
     {
         currentScore = PlayerPrefs.GetFloat("CurrentScore");
 
-        // ”CˆÓ‚ÌƒL[“ü—Í‚É‘Î‚·‚éƒAƒNƒVƒ‡ƒ“‚ğİ’è
+        // ä»»æ„ã®ã‚­ãƒ¼å…¥åŠ›ã«å¯¾ã™ã‚‹ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¨­å®š
         anyKeyAction = new InputAction(type: InputActionType.PassThrough);
         anyKeyAction.AddBinding("<Keyboard>/anyKey");
         anyKeyAction.performed += OnAnyKeyPerformed;
@@ -27,6 +30,8 @@ public class ResultManager : MonoBehaviour
         rankingScores = ranking.GetRankingTime();
 
         SceneFadeManager.Instance.FadeIn();
+
+        BGMManager.Instance.Stop();
     }
 
     private void Update()
@@ -36,11 +41,16 @@ public class ResultManager : MonoBehaviour
 
     private void OnAnyKeyPerformed(InputAction.CallbackContext context)
     {
-        SceneFadeManager.Instance.FadeOut(() =>
+        if (!isRequested)
         {
-            SceneManager.LoadScene("Title");
+            isRequested = true;
 
-        });
+            SceneFadeManager.Instance.FadeOut(() =>
+            {
+                SceneManager.LoadScene("Title");
+
+            });
+        }
     }
 
     private void OnDestroy()
