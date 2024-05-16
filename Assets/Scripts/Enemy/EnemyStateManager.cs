@@ -25,15 +25,20 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < movePointsParent.transform.childCount; i++)
-        {
-            movePoints.Add(movePointsParent.transform.GetChild(i).position);
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < movePointsParent.transform.childCount; i++)
+        {
+            var point = movePointsParent.transform.GetChild(i);
+            point.gameObject.SetActive(false);
+            var pos = point.position;
+            pos.y = 0.0f;
+            movePoints.Add(pos);
+        }
+
         _enemyPerception = GetComponent<EnemyPerception>();
 
         switch (enemyType)
@@ -45,6 +50,7 @@ public class EnemyStateManager : MonoBehaviour
                 EnemyStateChange(new EnemyStateStand());
                 break;
             default:
+
                 break;
         }
     }
