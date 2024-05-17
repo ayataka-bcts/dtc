@@ -15,6 +15,8 @@ public class ResultManager : MonoBehaviour
 
     private bool isRequested = false;
 
+    private Ranking ranking;
+
     private void Start()
     {
         currentScore = PlayerPrefs.GetFloat("CurrentScore");
@@ -26,7 +28,7 @@ public class ResultManager : MonoBehaviour
         pressButtonAction.performed += OnPressButtonPerformed;
         pressButtonAction.Enable();
 
-        Ranking ranking = new Ranking(currentScore);
+        ranking = new Ranking(currentScore);
         
         rankingScores = ranking.GetRankingTime();
 
@@ -45,6 +47,8 @@ public class ResultManager : MonoBehaviour
         if (!isRequested)
         {
             isRequested = true;
+
+            ranking.SaveRankingData();
 
             SceneFadeManager.Instance.FadeOut(() =>
             {

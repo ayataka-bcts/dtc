@@ -20,7 +20,7 @@ public class Ranking
             rankingTimes[i] = PlayerPrefs.GetFloat(rankingKeys[i]);
             if (rankingTimes[i] == 0.0f)
             {
-                rankingTimes[i] = 99.99f;
+                rankingTimes[i] = 999.99f;
             }
         }
 
@@ -28,6 +28,10 @@ public class Ranking
     }
 
     ~Ranking ()
+    {
+    }
+
+    public void SaveRankingData()
     {
         for (int i = 0; i < rankingKeys.Length; i++)
         {
