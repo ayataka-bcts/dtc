@@ -104,7 +104,7 @@ public class AudioPathCreator : AssetPostprocessor {
 		string selfPath = Directory.GetFiles("Assets", "*", System.IO.SearchOption.AllDirectories)
 			.FirstOrDefault(path => System.IO.Path.GetFileName(path) == selfFileName);
 
-		string exportPath = selfPath.Replace(selfFileName, "").Replace("Editor","Scripts");
+		string exportPath = selfPath.Replace(selfFileName, "").Replace("Editor","Scripts/Audio");
 		
 		//定数クラス作成
 		ConstantsClassCreator.Create(directoryName + "Path", directoryName + "ファイルへのパスを定数で管理するクラス", audioPathDict, exportPath, "KanKikuchi.AudioManager");
