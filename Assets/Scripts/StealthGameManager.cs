@@ -69,6 +69,14 @@ public class StealthGameManager : MonoBehaviour
                     BGMManager.Instance.Play(bgmAudioClip);
                 }
                 timer += Time.deltaTime;
+
+                if(SceneFadeManager.Instance.IsPlayingFadeOut())
+                {
+                    state = GameState.End;
+
+                    EnemyState.OnCatchPlayer -= GameOverTrans;
+                    Goal.OnSuccessGame -= GameClearTrans;
+                }
                 break;
             case GameState.Pause:
                 break;
@@ -83,9 +91,6 @@ public class StealthGameManager : MonoBehaviour
     private void OnDestroy()
     {
         PlayerPrefs.SetFloat("CurrentScore", timer);
-
-        EnemyState.OnCatchPlayer -= GameOverTrans;
-        Goal.OnSuccessGame -= GameClearTrans;
     }
 
     public static void GameOverTrans()
