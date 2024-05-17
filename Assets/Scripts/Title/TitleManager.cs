@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip audioClip;
+    private AudioClip titleBGM;
 
     private InputAction pressButtonAction;
 
@@ -23,9 +23,9 @@ public class TitleManager : MonoBehaviour
         pressButtonAction.performed += OnAnyKeyPerformed;
         pressButtonAction.Enable();
 
-        if(audioClip != null)
+        if(titleBGM != null)
         {
-            BGMManager.Instance.Play(audioClip);
+            BGMManager.Instance.Play(titleBGM);
         }
     }
 

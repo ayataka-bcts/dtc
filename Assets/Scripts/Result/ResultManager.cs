@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class ResultManager : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip successBGM;
+
     private InputAction pressButtonAction;
 
     public bool isFailure = false;
@@ -39,6 +42,10 @@ public class ResultManager : MonoBehaviour
         SceneFadeManager.Instance.FadeIn();
 
         BGMManager.Instance.Stop();
+        if (successBGM != null && !isFailure)
+        {
+            BGMManager.Instance.Play(successBGM);
+        }
     }
 
     private void Update()
