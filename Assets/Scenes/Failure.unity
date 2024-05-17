@@ -918,6 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43b7e726ffa7074fb906a6b0d7ec9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFailure: 1
   currentScore: 0
   rankingScores: []
 --- !u!4 &692667643

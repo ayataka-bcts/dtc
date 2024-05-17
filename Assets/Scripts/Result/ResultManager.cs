@@ -10,6 +10,8 @@ public class ResultManager : MonoBehaviour
 {
     private InputAction pressButtonAction;
 
+    public bool isFailure = false;
+
     public float currentScore;
     public float[] rankingScores;
 
@@ -19,8 +21,6 @@ public class ResultManager : MonoBehaviour
 
     private void Start()
     {
-        currentScore = PlayerPrefs.GetFloat("CurrentScore");
-
         // 任意のキー入力に対するアクションを設定
         pressButtonAction = new InputAction(type: InputActionType.PassThrough);
         pressButtonAction.AddBinding("<Keyboard>/Space");
@@ -28,9 +28,13 @@ public class ResultManager : MonoBehaviour
         pressButtonAction.performed += OnPressButtonPerformed;
         pressButtonAction.Enable();
 
-        ranking = new Ranking(currentScore);
-        
-        rankingScores = ranking.GetRankingTime();
+        if(!isFailure)
+        {
+            currentScore = PlayerPrefs.GetFloat("CurrentScore");
+            ranking = new Ranking(currentScore);
+            rankingScores = ranking.GetRankingTime();
+        }
+
 
         SceneFadeManager.Instance.FadeIn();
 
@@ -48,7 +52,10 @@ public class ResultManager : MonoBehaviour
         {
             isRequested = true;
 
-            ranking.SaveRankingData();
+            if(!isFailure)
+            {
+                ranking.SaveRankingData();
+            }
 
             SceneFadeManager.Instance.FadeOut(() =>
             {
