@@ -11,6 +11,7 @@ public class StealthGameManager : MonoBehaviour
         Ready,
         InGame,
         Pause,
+        End,
     }
     private GameState state;
 
@@ -70,6 +71,8 @@ public class StealthGameManager : MonoBehaviour
                 timer += Time.deltaTime;
                 break;
             case GameState.Pause:
+                break;
+            case GameState.End:
                 break;
             default:
                 break;

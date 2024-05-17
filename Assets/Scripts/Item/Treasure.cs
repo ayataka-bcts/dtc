@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,6 +32,10 @@ public class Treasure : MonoBehaviour
             if(tpc != null)
             {
                 tpc.hasTreasure = true;
+                if(getAudioClip != null)
+                {
+                    SEManager.Instance.Play(getAudioClip);
+                }
                 Destroy(this.gameObject);
             }
         }

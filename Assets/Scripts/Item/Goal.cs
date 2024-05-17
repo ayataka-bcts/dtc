@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using StarterAssets;
 using System;
 using System.Collections;
@@ -33,6 +34,11 @@ public class Goal : MonoBehaviour
             if(tpc != null && tpc.hasTreasure)
             {
                 OnSuccessGame?.Invoke();
+
+                if(goalAudioClip != null)
+                {
+                    SEManager.Instance.Play(goalAudioClip);
+                }
             }
         }
     }

@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip audioClip;
+
     private InputAction pressButtonAction;
 
     private bool isRequested = false;
@@ -18,6 +22,11 @@ public class TitleManager : MonoBehaviour
         pressButtonAction.AddBinding("<Gamepad>/ButtonSouth");
         pressButtonAction.performed += OnAnyKeyPerformed;
         pressButtonAction.Enable();
+
+        if(audioClip != null)
+        {
+            BGMManager.Instance.Play(audioClip);
+        }
     }
 
     private void Start()
