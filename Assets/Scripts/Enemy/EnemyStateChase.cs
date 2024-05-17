@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,10 @@ public class EnemyStateChase : EnemyState
     public EnemyStateChase()
     {
         //OnStateChange += OnChange;
+        if(StealthGameManager.s_foundAudioClip != null)
+        {
+            SEManager.Instance.Play(StealthGameManager.s_foundAudioClip);
+        }
     }
 
     public override void Exec(EnemyPerception perception)

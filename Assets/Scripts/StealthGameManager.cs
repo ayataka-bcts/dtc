@@ -29,9 +29,15 @@ public class StealthGameManager : MonoBehaviour
     [Label("見つかったときの音")]
     private AudioClip foundAudioClip;
 
+    public static AudioClip s_catchAudioClip;
+    public static AudioClip s_foundAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
+        s_catchAudioClip = catchAudioClip;
+        s_foundAudioClip = foundAudioClip;
+
         timer = 0.0f;
 
         EnemyState.OnCatchPlayer += GameOverTrans;
@@ -52,12 +58,12 @@ public class StealthGameManager : MonoBehaviour
                         SceneFadeManager.Instance.FadeIn(() =>
                         {
                             state = GameState.InGame;
-                        });
+                        }, 0.2f);
                     }
                 }
                 break;
             case GameState.InGame:
-                if(!BGMManager.Instance.IsPlaying())
+                if(!BGMManager.Instance.IsPlaying() && bgmAudioClip != null)
                 {
                     BGMManager.Instance.Play(bgmAudioClip);
                 }
@@ -87,6 +93,10 @@ public class StealthGameManager : MonoBehaviour
             {
                 SceneManager.LoadScene("Failure");
             });
+            if(s_catchAudioClip != null)
+            {
+                SEManager.Instance.Play(s_catchAudioClip);
+            }
         }
     }
 

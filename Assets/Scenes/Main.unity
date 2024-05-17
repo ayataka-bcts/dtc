@@ -1189,6 +1189,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1889,7 +1890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ac075e4c894d047aa43eddbff79654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmAudioClip: {fileID: 8300000, guid: e82b324306c564b748467e8d485c7255, type: 3}
+  bgmAudioClip: {fileID: 0}
   catchAudioClip: {fileID: 0}
   foundAudioClip: {fileID: 0}
 --- !u!4 &1658962492
