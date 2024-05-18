@@ -33,6 +33,8 @@ public class StealthGameManager : MonoBehaviour
     public static AudioClip s_catchAudioClip;
     public static AudioClip s_foundAudioClip;
 
+    private static bool isRequested = false;
+
     // Start is called before the first frame update
     void Start()
     {
