@@ -59,15 +59,16 @@ public class StealthGameManager : MonoBehaviour
                         SceneFadeManager.Instance.FadeIn(() =>
                         {
                             state = GameState.InGame;
-                        }, 0.2f);
+                        }, 0.5f);
+
+                        if (bgmAudioClip != null)
+                        {
+                            BGMManager.Instance.Play(bgmAudioClip);
+                        }
                     }
                 }
                 break;
             case GameState.InGame:
-                if(!BGMManager.Instance.IsPlaying() && bgmAudioClip != null)
-                {
-                    BGMManager.Instance.Play(bgmAudioClip);
-                }
                 timer += Time.deltaTime;
 
                 if(SceneFadeManager.Instance.IsPlayingFadeOut())

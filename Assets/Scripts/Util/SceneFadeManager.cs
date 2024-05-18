@@ -40,7 +40,7 @@ public class SceneFadeManager : FadeManager<SceneFadeManager>
 
     public bool IsPlayingFadeIn()
     {
-        if(fadeInSequence == null)
+        if(fadeInSequence == null || !fadeInSequence.IsActive())
         {
             return false;
         }
@@ -64,7 +64,7 @@ public class SceneFadeManager : FadeManager<SceneFadeManager>
 
     public bool IsPlayingFadeOut()
     {
-        if(fadeOutSequence == null)
+        if(fadeOutSequence == null || !fadeOutSequence.IsActive())
         {
             return false;
         }
