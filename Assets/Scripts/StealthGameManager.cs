@@ -30,12 +30,26 @@ public class StealthGameManager : MonoBehaviour
     [Label("見つかったときの音")]
     private AudioClip foundAudioClip;
 
+#if UNITY_EDITOR
+    [Header("--- デバッグ設定 ---")]
+    [Tooltip("ONにすると敵に見つかっても捕まらなくなります（デバッグ用）")]
+    [Label("捕まらないモード")]
+    public bool IsNoCatchMode = false;
+
+    public static bool s_isNoCatchMode => Instance != null && Instance.IsNoCatchMode;
+
+    private static StealthGameManager Instance;
+#endif
+
     public static AudioClip s_catchAudioClip;
     public static AudioClip s_foundAudioClip;
 
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_EDITOR
+        Instance = this;
+#endif
         s_catchAudioClip = catchAudioClip;
         s_foundAudioClip = foundAudioClip;
 

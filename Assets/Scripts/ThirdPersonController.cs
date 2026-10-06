@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -31,6 +31,7 @@ namespace StarterAssets
         [Tooltip("はやくなりやすさとおそくなりやすさ")]
         [Label("はやさの変わり方")]
         public float SpeedChangeRate = 10.0f;
+
 
         [HideInInspector]
         public AudioClip LandingAudioClip;
@@ -105,6 +106,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+
 
         // timeout deltatime
         private float _jumpTimeoutDelta;

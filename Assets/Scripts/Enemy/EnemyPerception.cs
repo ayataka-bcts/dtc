@@ -38,6 +38,14 @@ public class EnemyPerception : MonoBehaviour
 
     public void Exec()
     {
+#if UNITY_EDITOR
+        if (StealthGameManager.s_isNoCatchMode)
+        {
+            IsFoundPlayer = false;
+            IsCathcPlayer = false;
+            return;
+        }
+#endif
         SightUpdate();
         TouchUpdate();
     }
@@ -82,6 +90,9 @@ public class EnemyPerception : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+#if UNITY_EDITOR
+            if (StealthGameManager.s_isNoCatchMode) return;
+#endif
             IsCathcPlayer = true;
         }
     }
