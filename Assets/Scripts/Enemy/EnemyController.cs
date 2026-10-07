@@ -95,8 +95,6 @@ public class EnemyController : MonoBehaviour
     // player
     private float _speed;
     private float _animationBlend;
-    private float _targetRotation = 0.0f;
-    private float _rotationVelocity;
     private float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
 
@@ -168,8 +166,10 @@ public class EnemyController : MonoBehaviour
         //float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
         float targetSpeed = (_enemyStateManager.IsChase()) ? SprintSpeed : MoveSpeed;
 
-        // a reference to the players current horizontal velocity
-        float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+        // 敵を動かしているのは NavMeshAgent なので、現在の速さもそちらから取る。
+        // CharacterController.velocity は Move() を呼んでいないため常に 0 で、
+        // それを基準にすると下の Lerp が目標の速さまで上がりきらない
+        float currentHorizontalSpeed = new Vector3(_navMeshAgent.velocity.x, 0.0f, _navMeshAgent.velocity.z).magnitude;
 
         float speedOffset = 0.1f;
         float inputMagnitude = 1.0f;
@@ -190,6 +190,10 @@ public class EnemyController : MonoBehaviour
         {
             _speed = targetSpeed;
         }
+
+        // 実際に敵を動かしているのは NavMeshAgent なので、ここで速さを渡さないと
+        // Inspector の「歩くはやさ / 走るはやさ」はアニメのブレンド値しか変えないことになる
+        _navMeshAgent.speed = _speed;
 
         if ((this.transform.position - targetPos).magnitude < 0.2f)
         {
