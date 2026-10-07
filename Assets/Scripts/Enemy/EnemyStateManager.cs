@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum EnemyType
 {
@@ -30,18 +32,33 @@ public class EnemyStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < movePointsParent.transform.childCount; i++)
+        if (movePointsParent == null)
         {
-            var point = movePointsParent.transform.GetChild(i);
-            point.gameObject.SetActive(false);
-            var pos = point.position;
-            pos.y = 0.0f;
-            movePoints.Add(pos);
+            Debug.LogWarning("巡回地点の親オブジェクトが設定されていません。その場で立ち止まります。", this);
+        }
+        else
+        {
+            for (int i = 0; i < movePointsParent.transform.childCount; i++)
+            {
+                var point = movePointsParent.transform.GetChild(i);
+                point.gameObject.SetActive(false);
+                var pos = point.position;
+                pos.y = 0.0f;
+                movePoints.Add(pos);
+            }
         }
 
         _enemyPerception = GetComponent<EnemyPerception>();
 
-        switch (enemyType)
+        // パトロールは巡回地点が1つ以上ないと成立しないので、無いときはスタンドに落とす
+        var type = enemyType;
+        if (type == EnemyType.パトロール && movePoints.Count == 0)
+        {
+            Debug.LogWarning("巡回地点が1つもないため、パトロールではなくスタンドで動きます。巡回地点を追加してください。", this);
+            type = EnemyType.スタンド;
+        }
+
+        switch (type)
         {
             case EnemyType.パトロール:
                 EnemyStateChange(new EnemyStatePatrol());
@@ -66,8 +83,6 @@ public class EnemyStateManager : MonoBehaviour
         {
             currentState.Exec(_enemyPerception);
         }
-
-        Debug.Log(currentState.ToString());
     }
 
     public void EnemyStateChange(EnemyState state)
@@ -79,16 +94,17 @@ public class EnemyStateManager : MonoBehaviour
 
     public Vector3 GetTargetPos()
     {
-        Vector3 target = Vector3.one;
+        if (currentState == null)
+        {
+            return transform.position;
+        }
 
-        target = currentState.GetTargetPos();
-
-        return target;
+        return currentState.GetTargetPos();
     }
 
     public bool IsChase()
     {
-        return (currentState.GetType() == typeof(EnemyStateChase));
+        return (currentState is EnemyStateChase);
     }
 
 #if UNITY_EDITOR
