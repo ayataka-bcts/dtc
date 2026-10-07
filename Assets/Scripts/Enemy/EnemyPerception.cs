@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class EnemyPerception : MonoBehaviour
 {
@@ -22,7 +21,14 @@ public class EnemyPerception : MonoBehaviour
 
     // 視線のレイ密度（正面1本は最低として加えて何本か）
     [SerializeField]
+    [Tooltip("視線を何本に分けて調べるか。多いほど見つけ漏れが減ります")]
+    [Label("目の細かさ")]
     private int _sightDensity = 6;
+
+    [SerializeField]
+    [Tooltip("視線をさえぎるものがあるレイヤー。プレイヤーのレイヤーも含めてください")]
+    [Label("視線がぶつかるもの")]
+    private LayerMask _sightBlockers = ~0;
 
     public bool IsFoundPlayer { get; private set; }
     public bool IsCathcPlayer { get; private set; }
@@ -55,29 +61,43 @@ public class EnemyPerception : MonoBehaviour
         Quaternion offsetRotation = Quaternion.Euler(0, -0.5f * _sightRadius, 0); // Y軸を中心に30度回転する四元数
         Vector3 rayTargetVec = offsetRotation * transform.forward;
         float durationRadius = _sightRadius / _sightDensity;
-        for(int i = 0; i < _sightDensity + 1; i++) 
+
+        // 扇のうち1本でもプレイヤーに当たれば発見。途中で return すると
+        // 「最後に調べたレイの結果」だけが残ってしまうので、全部調べてから1回だけ書き込む
+        bool found = false;
+        GameObject foundPlayer = null;
+
+        for(int i = 0; i < _sightDensity + 1; i++)
         {
             var eyePos = transform.position + new Vector3(0.0f, 1.0f, 0.0f);
             Ray ray = new Ray(eyePos, rayTargetVec);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _sightDistance))
+            if (Physics.Raycast(ray, out hit, _sightDistance, _sightBlockers))
             {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
                 if (hit.transform.gameObject.tag == "Player")
                 {
-                    IsFoundPlayer = true;
-                    playerGameObject = hit.transform.gameObject;
-                    return;
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow);
+                    found = true;
+                    foundPlayer = hit.transform.gameObject;
+                }
+                else
+                {
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
                 }
             }
             else
             {
                 Debug.DrawRay(ray.origin, ray.direction * _sightDistance, Color.red);
-                IsFoundPlayer = false;
             }
 
             Quaternion rotation = Quaternion.Euler(0, durationRadius, 0); // Y軸を中心に30度回転する四元数
             rayTargetVec = rotation * rayTargetVec;
+        }
+
+        IsFoundPlayer = found;
+        if (found)
+        {
+            playerGameObject = foundPlayer;
         }
     }
 
@@ -94,6 +114,16 @@ public class EnemyPerception : MonoBehaviour
             if (StealthGameManager.s_isNoCatchMode) return;
 #endif
             IsCathcPlayer = true;
+        }
+    }
+
+    // 離れたら降ろす。これが無いと一度かすっただけで触れた状態が残り続け、
+    // あとから追跡状態に入った瞬間に問答無用で捕まることになる
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            IsCathcPlayer = false;
         }
     }
 }
